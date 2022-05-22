@@ -1,0 +1,25 @@
+### Info page
+
+GET http://localhost:3001/info
+
+### Get all
+
+GET http://localhost:3001/api/persons
+
+### Get one
+
+GET http://localhost:3001/api/persons/1
+
+### Delete one
+
+DELETE http://localhost:3001/api/persons/1
+
+### Create one
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Rohit Kharsan",
+  "number": "7077-647-977"
+}

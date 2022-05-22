@@ -105,24 +105,34 @@ const App = () => {
           );
           flashMessage(`Updated ${newPerson.name}'s phone number`);
         })
-        .catch(() => {
-          flashMessage(`ERROR: ${oldPerson.name} was deleted`, "error");
+        .catch((err) => {
+          flashMessage(`ERROR: ${err.response.data.error}`, "error");
         });
     } else {
-      personService.addPerson({ name, number }).then((newPerson) => {
-        setPersons([...persons, newPerson]);
-        flashMessage(`Added ${newPerson.name}'s details`);
-      });
+      personService
+        .addPerson({ name, number })
+        .then((newPerson) => {
+          setPersons([...persons, newPerson]);
+          flashMessage(`Added ${newPerson.name}'s details`);
+        })
+        .catch((err) => {
+          flashMessage(`ERROR: ${err.response.data.error}`, "error");
+        });
     }
   };
 
   const deletePerson = (id) => {
     const personName = persons.find((p) => p.id === id)?.name;
     if (window.confirm(`Delete ${personName}?`)) {
-      personService.deletePerson(id).then(() => {
-        setPersons(persons.filter((p) => p.id !== id));
-        flashMessage(`Deleted ${personName}'s details`);
-      });
+      personService
+        .deletePerson(id)
+        .then(() => {
+          setPersons(persons.filter((p) => p.id !== id));
+          flashMessage(`Deleted ${personName}'s details`);
+        })
+        .catch((err) => {
+          flashMessage(`ERROR: ${err.response.data.error}`, "error");
+        });
     }
   };
 
